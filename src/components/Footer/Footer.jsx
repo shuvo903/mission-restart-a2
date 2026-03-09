@@ -6,8 +6,8 @@ import mailIcon from "../../assets/mail.png";
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="footer sm:footer-horizontal bg-black  p-10 text-white">
+        <div className='bg-black'>
+            <footer className="footer sm:footer-horizontal   p-10 text-white mx-auto max-w-screen-2xl px-3 lg:px-6">
                 <aside>
                     <h2 className="lg:text-2xl text-lg font-bold">CS — Ticket System</h2>
                     <p className='text-sm text-stone-400'>
@@ -44,9 +44,9 @@ const Footer = () => {
                 </nav>
 
             </footer>
-            <footer className="footer sm:footer-horizontal footer-center bg-black  p-4 text-white border-t-2 border-gray-500 ">
+            <footer className="footer sm:footer-horizontal footer-center bg-black text-base  p-4 text-white border-t-2 border-gray-500 ">
                 <aside>
-                    <p>Copyright © {new Date().getFullYear()} - © 2025 CS — Ticket System. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} CS — Ticket System. All rights reserved.</p>
                 </aside>
             </footer>
         </div>

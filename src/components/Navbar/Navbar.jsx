@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <div  className='mx-auto max-w-screen-2xl px-3 lg:px-6'>
+    <div className='mx-auto max-w-screen-2xl px-3 lg:px-6'>
       <div className="navbar bg-white">
         <div className="navbar-start">
           <a className="lg:text-2xl text-lg font-bold">CS — Ticket System</a>

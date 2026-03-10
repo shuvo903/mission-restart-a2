@@ -15,19 +15,33 @@ const ticketsPromise = fetchTickets()
 
 function App() {
 
+  const [inProgress,setInProgress] = useState(0);
+
+  const [resolved,setResolved] = useState(0);
+
   const [clickedTickets, setClickedTickets] = useState([]);
 
-  console.log(clickedTickets);
+
+
+  const taskComplete = (t) => {
+    const filteteredData = clickedTickets.filter(task => task.id !== t.id);
+
+    setClickedTickets(filteteredData)
+
+    console.log(filteteredData);
+
+
+  }
 
   return (
     <>
 
       <Navbar></Navbar>
 
-      <Banner></Banner>
+      <Banner inProgress={inProgress} resolved={resolved}></Banner>
 
       <Suspense fallback={<span className="flex justify-center items-center  w-20 mx-auto loading loading-infinity loading-xl"></span>}>
-        <MainSection setClickedTickets={setClickedTickets} clickedTickets={clickedTickets} ticketsPromise={ticketsPromise}></MainSection> 
+        <MainSection inProgress={inProgress} setInProgress={setInProgress} resolved={resolved} setResolved={setResolved} taskComplete={taskComplete} setClickedTickets={setClickedTickets} clickedTickets={clickedTickets} ticketsPromise={ticketsPromise}></MainSection> 
       </Suspense>
 
       <Footer></Footer>

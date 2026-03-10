@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import calendarImg from "../../assets/calendar.png";
-const TicketsCards = ({ ticket, clickedTickets, setClickedTickets }) => {
+const TicketsCards = ({ inProgress, setInProgress, ticket, clickedTickets, setClickedTickets, taskComplete, ticketStatus }) => {
 
     const [isClicked, setIsClicked] = useState(true)
 
     const handleClickedTicket = (ticketData) => {
 
         setIsClicked(false)
+
+
+        //     taskComplete(
+        // clickedTickets
+        //     )
+
+        setInProgress(inProgress + 1)
+
         setClickedTickets([...clickedTickets, ticketData])
-        console.log(ticketData);
+
 
     }
 

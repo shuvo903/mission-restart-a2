@@ -4,7 +4,7 @@ import TaskStatus from '../TaskStatus/TaskStatus';
 import ResolvedTask from '../ResolvedTask/ResolvedTask';
 
 
-const MainSection = ({ ticketsPromise, clickedTickets, setClickedTickets }) => {
+const MainSection = ({inProgress, setInProgress, resolved, setResolved,  ticketsPromise, clickedTickets, setClickedTickets,taskComplete }) => {
 
     const ticketsData = use(ticketsPromise);
     return (
@@ -21,7 +21,7 @@ const MainSection = ({ ticketsPromise, clickedTickets, setClickedTickets }) => {
                         {/* Card */}
 
                         {
-                            ticketsData.map(ticket => <TicketsCards key={ticket.id} clickedTickets={clickedTickets} setClickedTickets={setClickedTickets} ticket={ticket}></TicketsCards>)
+                            ticketsData.map(ticket => <TicketsCards key={ticket.id}  inProgress={inProgress} setInProgress={setInProgress} taskComplete={taskComplete} clickedTickets={clickedTickets} setClickedTickets={setClickedTickets} ticket={ticket}></TicketsCards>)
                         }
 
                     </div>
@@ -37,7 +37,8 @@ const MainSection = ({ ticketsPromise, clickedTickets, setClickedTickets }) => {
 
                     {/* Card */}
 
-                   <TaskStatus setClickedTickets={setClickedTickets} clickedTickets={clickedTickets}></TaskStatus>
+                   <TaskStatus inProgress={inProgress} setInProgress={setInProgress} resolved={resolved} setResolved={setResolved} taskComplete={taskComplete} 
+                    setClickedTickets={setClickedTickets} clickedTickets={clickedTickets}></TaskStatus>
 
                     {/* Resolved Task Cards */}
 
@@ -45,7 +46,7 @@ const MainSection = ({ ticketsPromise, clickedTickets, setClickedTickets }) => {
                         <h2 className='lg:text-2xl text-lg font-semibold mb-4'>Resolved Task</h2>
 
                         {/* Card */}
-<ResolvedTask></ResolvedTask>
+<ResolvedTask ></ResolvedTask>
 
                     </div>
                 </div>

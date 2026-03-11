@@ -1,41 +1,37 @@
-import React, { useState } from 'react';
+import { toast } from "react-toastify";
 import calendarImg from "../../assets/calendar.png";
-const TicketsCards = ({ inProgress, setInProgress, ticket, clickedTickets, setClickedTickets, taskComplete, ticketStatus }) => {
+const TicketsCards = ({ inProgress, setInProgress, ticket, clickedTickets, setClickedTickets }) => {
 
-    const [isClicked, setIsClicked] = useState(true)
+    const isAlreadyClicked = clickedTickets.some(clicked => clicked.id === ticket.id);
 
     const handleClickedTicket = (ticketData) => {
 
-        setIsClicked(false)
+        if (isAlreadyClicked) return;
 
-
-        //     taskComplete(
-        // clickedTickets
-        //     )
 
         setInProgress(inProgress + 1)
 
         setClickedTickets([...clickedTickets, ticketData])
 
-
+        toast("Ticket Added Task Status Successfully.")
     }
 
     return (
         <div>
 
-            <div disabled={isClicked} onClick={() => {
-                handleClickedTicket(ticket)
-            }} className={`bg-white rounded-md p-4 drop-shadow-xl  hover:shadow-xl ${isClicked === true ? "cursor-pointer" : "pointer-events-none opacity-70"}`} >
+            <div onClick={() => handleClickedTicket(ticket)}
+                className={`bg-white rounded-md p-4 drop-shadow-xl hover:shadow-xl transition-all ${!isAlreadyClicked ? "cursor-pointer" : "pointer-events-none opacity-50"}`}>
 
                 <div className="flex items-center justify-between">
                     <h3 className='text-xl font-medium '>{ticket.title}</h3>
                     <div className="items-center text-center">
 
-                        <div className={`badge text-base rounded-4xl font-semibold py-4 whitespace-nowrap ${isClicked === true ? "bg-[#B9F8CF] text-green-800" : "text-orange-800 bg-[#F8F3B9]"}`}>
-                            <div className={`w-3.5 h-3.5 rounded-full ${isClicked === true ? " bg-green-600" : "bg-orange-300"}`}>
+                        <div className={`badge text-base rounded-4xl font-semibold py-4 whitespace-nowrap 
+                         ${!isAlreadyClicked ? "bg-[#B9F8CF] text-green-800" : "text-orange-800 bg-[#F8F3B9]"}`}>
 
-                            </div>
-                            <span>{`${isClicked === true ? `${ticket.status}` : "In- Progress"}`}</span>
+                            <div className={`w-3.5 h-3.5 rounded-full ${!isAlreadyClicked ? "bg-green-600" : "bg-orange-300"}`}></div>
+
+                            <span>{!isAlreadyClicked ? ticket.status : "In-Progress"}</span>
                         </div>
                     </div>
                 </div>

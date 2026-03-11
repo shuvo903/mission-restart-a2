@@ -1,7 +1,7 @@
 import React from 'react';
 import BannerImgLeft from "../../assets/banner-bg-left.png";
 import BannerImgRight from "../../assets/banner-bg-right.png";
-const Banner = ({inProgress,resolved}) => {
+const Banner = ({ inProgress, resolved }) => {
     return (
         <div className='bg-gray-200 w-full'>
             <div className="flex flex-col lg:flex-row justify-between lg:gap-10 gap-6 py-20 mx-auto max-w-screen-2xl px-4 lg:px-6 items-center">

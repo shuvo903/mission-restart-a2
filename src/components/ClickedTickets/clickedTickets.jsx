@@ -1,13 +1,13 @@
 import React from 'react';
 import TicketsCards from '../TicketsCards/TicketsCards';
 
-const clickedTickets = ({clickedTickets}) => {
+const clickedTickets = ({ clickedTickets }) => {
 
 
     return (
         <div>
             {
-                clickedTickets.map(click => <TicketsCards click={click}></TicketsCards> )
+                clickedTickets.map(click => <TicketsCards click={click}></TicketsCards>)
             }
         </div>
     );

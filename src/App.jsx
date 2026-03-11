@@ -1,6 +1,7 @@
 
 import { Suspense, useState } from 'react'
 import './App.css'
+import { ToastContainer } from 'react-toastify';
 import Banner from './components/Banner/Banner'
 import Footer from './components/Footer/Footer'
 import MainSection from './components/MainSection/MainSection'
@@ -15,20 +16,24 @@ const ticketsPromise = fetchTickets()
 
 function App() {
 
-  const [inProgress,setInProgress] = useState(0);
+  const [inProgress, setInProgress] = useState(0);
 
-  const [resolved,setResolved] = useState(0);
+  const [resolved, setResolved] = useState(0);
+
+  const [resolvedList, setResolvedList] = useState([]);
 
   const [clickedTickets, setClickedTickets] = useState([]);
 
 
 
   const taskComplete = (t) => {
+
     const filteteredData = clickedTickets.filter(task => task.id !== t.id);
 
     setClickedTickets(filteteredData)
 
-    console.log(filteteredData);
+    setResolvedList([...resolvedList, t])
+
 
 
   }
@@ -41,10 +46,12 @@ function App() {
       <Banner inProgress={inProgress} resolved={resolved}></Banner>
 
       <Suspense fallback={<span className="flex justify-center items-center  w-20 mx-auto loading loading-infinity loading-xl"></span>}>
-        <MainSection inProgress={inProgress} setInProgress={setInProgress} resolved={resolved} setResolved={setResolved} taskComplete={taskComplete} setClickedTickets={setClickedTickets} clickedTickets={clickedTickets} ticketsPromise={ticketsPromise}></MainSection> 
+        <MainSection resolvedList={resolvedList} setResolvedList={setResolvedList} inProgress={inProgress} setInProgress={setInProgress} resolved={resolved} setResolved={setResolved} taskComplete={taskComplete} setClickedTickets={setClickedTickets} clickedTickets={clickedTickets} ticketsPromise={ticketsPromise}></MainSection>
       </Suspense>
 
       <Footer></Footer>
+
+      <ToastContainer />
     </>
   )
 }

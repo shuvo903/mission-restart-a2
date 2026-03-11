@@ -4,7 +4,7 @@ import TaskStatus from '../TaskStatus/TaskStatus';
 import ResolvedTask from '../ResolvedTask/ResolvedTask';
 
 
-const MainSection = ({inProgress, setInProgress, resolved, setResolved,  ticketsPromise, clickedTickets, setClickedTickets,taskComplete }) => {
+const MainSection = ({ resolvedList, setResolvedList, inProgress, setInProgress, resolved, setResolved, ticketsPromise, clickedTickets, setClickedTickets, taskComplete }) => {
 
     const ticketsData = use(ticketsPromise);
     return (
@@ -21,7 +21,11 @@ const MainSection = ({inProgress, setInProgress, resolved, setResolved,  tickets
                         {/* Card */}
 
                         {
-                            ticketsData.map(ticket => <TicketsCards key={ticket.id}  inProgress={inProgress} setInProgress={setInProgress} taskComplete={taskComplete} clickedTickets={clickedTickets} setClickedTickets={setClickedTickets} ticket={ticket}></TicketsCards>)
+                            ticketsData
+
+                                .filter(ticket => !resolvedList.some(clicked => clicked.id === ticket.id))
+
+                                .map(ticket => <TicketsCards key={ticket.id} inProgress={inProgress} setInProgress={setInProgress} taskComplete={taskComplete} clickedTickets={clickedTickets} setClickedTickets={setClickedTickets} ticket={ticket}></TicketsCards>)
                         }
 
                     </div>
@@ -37,8 +41,8 @@ const MainSection = ({inProgress, setInProgress, resolved, setResolved,  tickets
 
                     {/* Card */}
 
-                   <TaskStatus inProgress={inProgress} setInProgress={setInProgress} resolved={resolved} setResolved={setResolved} taskComplete={taskComplete} 
-                    setClickedTickets={setClickedTickets} clickedTickets={clickedTickets}></TaskStatus>
+                    <TaskStatus inProgress={inProgress} setInProgress={setInProgress} resolved={resolved} setResolved={setResolved} taskComplete={taskComplete}
+                        setClickedTickets={setClickedTickets} clickedTickets={clickedTickets}></TaskStatus>
 
                     {/* Resolved Task Cards */}
 
@@ -46,7 +50,10 @@ const MainSection = ({inProgress, setInProgress, resolved, setResolved,  tickets
                         <h2 className='lg:text-2xl text-lg font-semibold mb-4'>Resolved Task</h2>
 
                         {/* Card */}
-<ResolvedTask ></ResolvedTask>
+                        {
+                            resolved === 0 ? <p className='text-xl font-medium text-stone-500'>No resolved tasks yet.</p> : resolvedList.map(res => <ResolvedTask key={res.id} resolvedList={resolvedList} setResolvedList={setResolvedList} res={res}></ResolvedTask>)
+                        }
+
 
                     </div>
                 </div>
